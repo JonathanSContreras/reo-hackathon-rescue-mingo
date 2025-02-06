@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Load codes from JSON file
 def load_codes():
-    with open('codes.json', 'r') as f:
+    with open('../codes.json', 'r') as f:
         return json.load(f)
 
 @app.route('/')
