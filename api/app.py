@@ -6,9 +6,15 @@ import os
 app = Flask(__name__)
 
 # Load codes from JSON file
+# def load_codes():
+#     with open('../codes.json', 'r') as f:
+#         return json.load(f)
+
 def load_codes():
-    with open('../codes.json', 'r') as f:
+    codes_path = os.path.join(os.path.dirname(__file__), '../codes.json')
+    with open(codes_path, 'r') as f:
         return json.load(f)
+
 
 @app.route('/')
 def index():
