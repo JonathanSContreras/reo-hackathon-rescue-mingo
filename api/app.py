@@ -1,6 +1,7 @@
-# app.py
-from flask import Flask, request, jsonify, render_template
+# api/app.py
+from flask import Flask, request, jsonify
 import json
+import os
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def load_codes():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "Welcome to the Code Crisis Hackathon!"
 
 @app.route('/check_code', methods=['POST'])
 def check_code():
@@ -24,4 +25,4 @@ def check_code():
         return jsonify({'success': False, 'message': 'Invalid code!'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
