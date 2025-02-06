@@ -18,6 +18,7 @@ def load_codes():
 
 @app.route('/')
 def index():
+    # html_path = os.path.join(os.path.dirname(__file__), '../index.html')
     # return "Welcome to the Code Crisis Hackathon!"
     return render_template('index.html')
 
