@@ -26,4 +26,4 @@ def check_code():
         return jsonify({'success': False, 'message': 'Invalid code!'})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
