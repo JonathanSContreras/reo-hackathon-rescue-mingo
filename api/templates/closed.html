@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SYSTEM FAILURE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 20px;
+            animation: glitch 1s infinite;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background-color: #300;
+            margin: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #f00;
+            transition: width 0.5s;
+        }
+
+        .status-message {
+            font-size: 1.2em;
+            margin: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .scanline {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.3);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        #console {
+            width: 80%;
+            height: 200px;
+            border: 1px solid #f00;
+            margin: 20px;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <h1>SYSTEM FAILURE</h1>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="status-message" style="animation-delay: 0.5s">Initializing collapse sequence...</div>
+        <div class="status-message" style="animation-delay: 1.5s">Core systems offline...</div>
+        <div class="status-message" style="animation-delay: 2.5s">Critical failure detected...</div>
+        <div id="console"></div>
+    </div>
+
+    <script>
+        // Progress bar animation
+        let progress = 0;
+        const progressBar = document.getElementById('progress');
+        const progressInterval = setInterval(() => {
+            progress += Math.random() * 3;
+            if(progress >= 100) {
+                progress = 100;
+                clearInterval(progressInterval);
+            }
+            progressBar.style.width = progress + '%';
+        }, 200);
+
+        // Console messages
+        const consoleElement = document.getElementById('console');
+        const messages = [
+            "ERROR: 0x7F3A9C21 - MEMORY CORRUPTION",
+            "WARNING: SYSTEM FILES MISSING",
+            "ALERT: THERMAL CRITICAL - SHUTDOWN IMMINENT",
+            "FAILURE: BOOT SECTOR DAMAGED",
+            "CRITICAL: HARD DRIVE FAILURE",
+            "WARNING: CPU OVERHEAT - 150°C",
+            "ALERT: NETWORK INTERFACE DOWN",
+            "ERROR: POWER SUPPLY FAILURE",
+            "EMERGENCY: INITIATING HARD SHUTDOWN"
+        ];
+
+        let messageIndex = 0;
+        const messageInterval = setInterval(() => {
+            if(messageIndex < messages.length) {
+                consoleElement.innerHTML += `> ${messages[messageIndex]}<br>`;
+                consoleElement.scrollTop = consoleElement.scrollHeight;
+                messageIndex++;
+            } else {
+                clearInterval(messageInterval);
+            }
+        }, 1500);
+
+        // Glitch effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                if(Math.random() < 0.3) {
+                    title.textContent = title.textContent.split('').map(c => 
+                        Math.random() < 0.1 ? String.fromCharCode(33 + Math.random() * 94) : c
+                    ).join('');
+                }
+            }, 50);
+        });
+    </script>
+</body>
+</html>
