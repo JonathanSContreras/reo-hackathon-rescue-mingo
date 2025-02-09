@@ -15,7 +15,7 @@ def load_codes():
 def index():
 
     # return "Welcome to the Code Crisis Hackathon!"
-    return render_template('index.html')
+    return render_template('closed.html')
 
 @app.route('/check_code', methods=['POST'])
 def check_code():
